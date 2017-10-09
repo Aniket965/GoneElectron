@@ -1,0 +1,23 @@
+{
+  "name": "GoneElectron",
+  "version": "1.0.0",
+  "description": "desktop app  :P",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aniket965/GoneElectron.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aniket965/GoneElectron/issues"
+  },
+  "homepage": "https://github.com/Aniket965/GoneElectron#readme",
+  "devDependencies": {
+    "electron": "^1.7.8"
+  }
+}
