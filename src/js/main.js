@@ -1,4 +1,5 @@
 const ipcRenderer = require('electron').ipcRenderer;
+const remote  = require('electron').remote
 
 function addTask(e) {
     const input = document.getElementById('taskin')
@@ -11,7 +12,17 @@ function addTask(e) {
     input.value = ""
 }
 
+remote.getCurrentWebContents().on('did-finish-load', _=>{
+    remote.getCurrentWindow().initialtasks.forEach((task)=>{
+        renderNewTask(task)
+    })
+})
+
 ipcRenderer.on('task-added', (e, task) => {
+   renderNewTask(task)
+})
+
+function renderNewTask(task){
     let row = document.createElement('div')
     row.setAttribute('class', 'row')
     let col = document.createElement('div')
@@ -38,5 +49,4 @@ ipcRenderer.on('task-added', (e, task) => {
     row.appendChild(col)
     col.appendChild(newtask)
     col.appendChild(label)
-})
-
+}
