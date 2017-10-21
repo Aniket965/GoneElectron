@@ -15,7 +15,11 @@ function addTask(e) {
 remote.getCurrentWebContents().on('did-finish-load', _=>{
     remote.getCurrentWindow().initialtasks.forEach((task)=>{
         renderNewTask(task)
-    })
+    })   
+})
+ipcRenderer.on('deletetask',(e,args)=>{
+  let task = document.getElementById(args).parentElement.parentElement
+  task.remove()
 })
 
 ipcRenderer.on('task-added', (e, task) => {
