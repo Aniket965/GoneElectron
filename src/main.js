@@ -1,6 +1,6 @@
 const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+const { app, BrowserWindow, ipcMain, remote,ipcRenderer } = electron
+let tasks = []
 app.on('ready', _ => {
   const mainWindow = new BrowserWindow({
     width: 780,
@@ -8,4 +8,10 @@ app.on('ready', _ => {
   })
   mainWindow.loadURL(`file://${__dirname}/index.html`)
   mainWindow.setMenu(null)
+  // mainWindow.webContents.openDevTools()
+
 })
+ipcMain.on('add-task', function (event, arg) {
+  tasks.push(arg)
+  event.sender.send('task-added',arg)
+});
