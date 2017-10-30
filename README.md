@@ -1,2 +1,2 @@
 # GoneElectron
-desktop app  :P
+desktop app.
