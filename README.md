@@ -1,2 +1,2 @@
-# GoneElectron   🌝 🌞 🌛  💩 👻
+# GoneElectron   🌝 🌞 🌛  💩 👻 🤡 😎 
 desktop app  :P
