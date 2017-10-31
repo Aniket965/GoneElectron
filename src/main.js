@@ -17,7 +17,7 @@ app.on('ready', _ => {
     mainWindow.loadURL(`file://${__dirname}/index.html`)
     mainWindow.setMenu(null)
     mainWindow.initialtasks = data
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
     checkForTaskTime(mainWindow)
   })
 })
