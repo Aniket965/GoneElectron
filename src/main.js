@@ -1,11 +1,12 @@
 const electron = require('electron')
 const os = require('os');
 const storage = require('electron-json-storage');
-const dataPath = storage.getDataPath();
-const { app, BrowserWindow, ipcMain, remote, ipcRenderer } = electron
+const dataPath = storage.getDataPath()
+const { app, BrowserWindow, ipcMain } = electron
 const SECS_IN_DAY = 86400
-storage.setDataPath(os.tmpdir());
-let tasks = []
+storage.setDataPath(os.tmpdir())
+
+let tasks = new Array()
 
 app.on('ready', _ => {
   const mainWindow = new BrowserWindow({
@@ -13,7 +14,9 @@ app.on('ready', _ => {
     height: 460
   })
   storage.get('tasks', (err, data) => {
-    tasks = data
+    if (!Object.keys(data).length === 0 && data.constructor === Object) {
+      tasks.push(data)
+    }
     mainWindow.loadURL(`file://${__dirname}/index.html`)
     mainWindow.setMenu(null)
     mainWindow.initialtasks = data
@@ -41,7 +44,7 @@ function checkForTaskTime(mainWindow) {
         /**
         * Deletes from ui
         */
-        mainWindow.webContents.send('deletetask',task.date)
+        mainWindow.webContents.send('deletetask', task.date)
         ischanged = true
         return false
       } else {
@@ -54,7 +57,7 @@ function checkForTaskTime(mainWindow) {
        */
       storage.set('tasks', tasks, function (error) {
         if (error) throw error;
-      });
+      })
 
     }
   }, 1000)
