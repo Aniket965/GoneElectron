@@ -1,8 +1,7 @@
 const electron = require('electron')
 const {
   ipcRenderer,
-  remote,
-  Notification
+  remote
 } = electron
 function addTask (e) {
   const input = document.getElementById('taskin')
@@ -23,11 +22,7 @@ remote.getCurrentWebContents().on('did-finish-load', _ => {
 ipcRenderer.on('deletetask', (e, args) => {
   let task = document.getElementById(args).parentElement.parentElement
   task.remove()
-  // Notify users that task deleted
-  let DeleteNotification = new Notification(`Task time up`, {
-    body: `${task.name}`
-  })
-  DeleteNotification.on('click', () => console.log(':P'))
+ 
 })
 
 ipcRenderer.on('task-added', (e, task) => {

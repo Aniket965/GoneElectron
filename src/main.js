@@ -2,7 +2,7 @@ const electron = require('electron')
 const os = require('os')
 const storage = require('electron-json-storage')
 const dataPath = storage.getDataPath()
-const { app, BrowserWindow, ipcMain } = electron
+const { app, BrowserWindow, ipcMain, Notification } = electron
 const SECS_IN_DAY = 10
 storage.setDataPath(os.tmpdir())
 
@@ -20,7 +20,7 @@ app.on('ready', _ => {
     mainWindow.loadURL(`file://${__dirname}/index.html`)
     mainWindow.setMenu(null)
     mainWindow.initialtasks = data
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
     checkForTaskTime(mainWindow)
   })
 })
@@ -40,11 +40,18 @@ function checkForTaskTime(mainWindow) {
       let current_Date = new Date()
       let current_time = current_Date.getTime()
       const timeDifference = (current_time - parseInt(task.date)) / 1000
-      console.log(timeDifference)
+
       if (timeDifference > SECS_IN_DAY) {
         /**
         * Deletes from ui
         */
+        // Notify users that task deleted
+        console.log(task)
+        let DeleteNotification = new Notification(`Task time up`, {
+          body: `LOL`
+        })
+        DeleteNotification.show()
+        DeleteNotification.on('click', () => console.log(':P'))
         mainWindow.webContents.send('deletetask', task.date)
         ischanged = true
         return false
