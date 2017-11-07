@@ -1,2 +1,2 @@
-# GoneElectron   🌝 🌞 🌛  💩 👻 🤡 😎 🍺
-desktop app  :P
+# GoneElectron 
+desktop app in which tasks Disappears after 24hours...
