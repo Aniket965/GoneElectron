@@ -21,6 +21,7 @@
     "electron": "^1.7.9"
   },
   "dependencies": {
-    "electron-json-storage": "^4.0.2"
+    "electron-json-storage": "^4.0.2",
+    "electron-notify": "^0.1.0"
   }
 }
