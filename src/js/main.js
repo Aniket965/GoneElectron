@@ -50,8 +50,12 @@ function renderNewTask (task) {
   let label = document.createElement('label')
   label.innerHTML = task.name
   let taskNode = document.getElementById('tasklist')
+  let deleteIcon = document.createElement('span')
+  deleteIcon.className = 'trash'
+  deleteIcon.innerHTML = ' 🗑️'
   taskNode.appendChild(row)
   row.appendChild(col)
   col.appendChild(newtask)
   col.appendChild(label)
+  label.appendChild(deleteIcon)
 }

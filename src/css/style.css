@@ -1,6 +1,12 @@
 body {
 }
 .heading {
-    color: #009688  ;    ;
+    color: #009688; 
     text-align: center;
+}
+.trash {
+    display: none;
+}
+label:hover .trash{
+    display: inline-block;
 }

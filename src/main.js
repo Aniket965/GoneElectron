@@ -34,7 +34,7 @@ ipcMain.on('add-task', function (event, arg) {
   event.sender.send('task-added', arg)
 })
 
-function checkForTaskTime(mainWindow) {
+function checkForTaskTime (mainWindow) {
   setInterval(_ => {
     const prev_tasks = tasks
     let ischanged = false
