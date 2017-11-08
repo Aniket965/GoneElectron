@@ -20,6 +20,10 @@ $(document).ready(() => {
     e.preventDefault()
     addTask(e)
   })
+  $('.invert-color').click(function () {
+    $('body').toggleClass("night");
+  })
+
   remote.getCurrentWindow().initialtasks.forEach((task) => {
     renderNewTask(task)
   })

@@ -10,3 +10,15 @@ body {
 label:hover .trash{
     display: inline-block;
 }
+.invert-bar {
+    /* background: pink; */
+    margin:1rem;
+    text-align: right;
+}
+.invert-color {
+    cursor: pointer;
+}
+.night {
+    background: black;
+    color: white;
+}
