@@ -4,7 +4,7 @@ const {
   remote
 } = electron
 var $ = require("jquery");
-function addTask (e) {
+function addTask(e) {
   const input = document.getElementById('taskin')
   const date = new Date()
   const data = {
@@ -13,8 +13,13 @@ function addTask (e) {
   }
   ipcRenderer.send('add-task', data)
   input.value = ''
+  return false
 }
-$(document).ready(()=>{
+$(document).ready(() => {
+  $('#subform').submit((e) => {
+    e.preventDefault()
+    addTask(e)
+  })
   remote.getCurrentWindow().initialtasks.forEach((task) => {
     renderNewTask(task)
   })
@@ -22,14 +27,14 @@ $(document).ready(()=>{
 ipcRenderer.on('deletetask', (e, args) => {
   let task = document.getElementById(args).parentElement.parentElement
   task.remove()
- 
+
 })
 
 ipcRenderer.on('task-added', (e, task) => {
   renderNewTask(task)
 })
 
-function renderNewTask (task) {
+function renderNewTask(task) {
   let row = document.createElement('div')
   row.setAttribute('class', 'row')
   let col = document.createElement('div')
@@ -57,7 +62,7 @@ function renderNewTask (task) {
   col.appendChild(newtask)
   col.appendChild(label)
   col.ondblclick = function (e) {
-   ipcRenderer.send('dbl-del-task',this.firstChild.id)
+    ipcRenderer.send('dbl-del-task', this.firstChild.id)
   }
 
 }
