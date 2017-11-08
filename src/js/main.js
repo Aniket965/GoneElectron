@@ -3,6 +3,7 @@ const {
   ipcRenderer,
   remote
 } = electron
+var $ = require("jquery");
 function addTask (e) {
   const input = document.getElementById('taskin')
   const date = new Date()
@@ -20,6 +21,7 @@ remote.getCurrentWebContents().on('did-finish-load', _ => {
   })
 })
 ipcRenderer.on('deletetask', (e, args) => {
+  console.log(args)
   let task = document.getElementById(args).parentElement.parentElement
   task.remove()
  
@@ -34,6 +36,8 @@ function renderNewTask (task) {
   row.setAttribute('class', 'row')
   let col = document.createElement('div')
   col.setAttribute('class', 'task col s6 push-s3')
+  let div = document.createElement('div')
+  div.className = "ge-checkbox"
   let newtask = document.createElement('input')
   newtask.type = 'checkbox'
   col.onclick = function (e) {
@@ -50,12 +54,13 @@ function renderNewTask (task) {
   let label = document.createElement('label')
   label.innerHTML = task.name
   let taskNode = document.getElementById('tasklist')
-  let deleteIcon = document.createElement('span')
-  deleteIcon.className = 'trash'
-  deleteIcon.innerHTML = ' 🗑️'
   taskNode.appendChild(row)
   row.appendChild(col)
   col.appendChild(newtask)
   col.appendChild(label)
-  label.appendChild(deleteIcon)
+  col.ondblclick = function (e) {
+    let task = this
+    task.remove()
+  }
+
 }

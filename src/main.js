@@ -3,7 +3,7 @@ const os = require('os')
 const storage = require('electron-json-storage')
 const dataPath = storage.getDataPath()
 const { app, BrowserWindow, ipcMain} = electron
-const SECS_IN_DAY = 10
+const SECS_IN_DAY = 1000
 storage.setDataPath(os.tmpdir())
 var eNotify
 let tasks = new Array()
@@ -49,7 +49,7 @@ function checkForTaskTime (mainWindow) {
         */
         // Notify users that task deleted
         mainWindow.webContents.send('deletetask', task.date)
-        eNotify.notify({ title: 'Task Timedout', text: `${task.name}` })
+        eNotify.notify({ title: 'Task Removed', text: `${task.name}` })
         ischanged = true
         return false
       } else {
