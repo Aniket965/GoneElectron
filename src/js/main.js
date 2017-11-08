@@ -14,14 +14,12 @@ function addTask (e) {
   ipcRenderer.send('add-task', data)
   input.value = ''
 }
-
-remote.getCurrentWebContents().on('did-finish-load', _ => {
+$(document).ready(()=>{
   remote.getCurrentWindow().initialtasks.forEach((task) => {
     renderNewTask(task)
   })
 })
 ipcRenderer.on('deletetask', (e, args) => {
-  console.log(args)
   let task = document.getElementById(args).parentElement.parentElement
   task.remove()
  
@@ -59,8 +57,7 @@ function renderNewTask (task) {
   col.appendChild(newtask)
   col.appendChild(label)
   col.ondblclick = function (e) {
-    let task = this
-    task.remove()
+   ipcRenderer.send('dbl-del-task',this.firstChild.id)
   }
 
 }

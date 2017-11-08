@@ -7,10 +7,11 @@ const SECS_IN_DAY = 1000
 storage.setDataPath(os.tmpdir())
 var eNotify
 let tasks = new Array()
+let mainWindow;
 
 app.on('ready', _ => {
 
-  const mainWindow = new BrowserWindow({
+   mainWindow = new BrowserWindow({
     width: 780,
     height: 460
   })
@@ -32,6 +33,19 @@ ipcMain.on('add-task', function (event, arg) {
     if (error) throw error
   })
   event.sender.send('task-added', arg)
+})
+ipcMain.on('dbl-del-task',function (event,arg) {
+  mainWindow.webContents.send('deletetask', arg)
+  tasks.filter((task) => {
+    if(task.date === arg)
+      return false
+    else
+      return true
+  })
+  storage.set('tasks', tasks, function (error) {
+    if (error) throw error
+  })
+
 })
 
 function checkForTaskTime (mainWindow) {
