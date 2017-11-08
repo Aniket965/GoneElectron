@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 body {
 }
 .heading {
     color: #009688; 
     text-align: center;
+    font-family: 'Dancing Script', cursive;
 }
 .trash {
     display: inline-table;

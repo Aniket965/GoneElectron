@@ -8,22 +8,34 @@ storage.setDataPath(os.tmpdir())
 var eNotify
 let tasks = new Array()
 let mainWindow;
+let splash;
 
 app.on('ready', _ => {
 
    mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 780,
-    height: 460
+    height: 460,
+    show:false
   })
   eNotify = require('electron-notify');
   storage.get('tasks', (err, data) => {
     if (!Object.keys(data).length === 0 && data.constructor === Object) {
       tasks.push(data)
     }
+    splash = new BrowserWindow({width: 780, height: 460, frame: false, alwaysOnTop: true});
+    splash.loadURL(`file://${__dirname}/splash.html`);
     mainWindow.loadURL(`file://${__dirname}/index.html`)
     mainWindow.setMenu(null)
     mainWindow.initialtasks = data
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
+    mainWindow.once('ready-to-show', () => {
+      setTimeout(function(){
+        splash.destroy();
+        mainWindow.show();
+      },2000)
+   
+    });
     checkForTaskTime(mainWindow)
   })
 })
