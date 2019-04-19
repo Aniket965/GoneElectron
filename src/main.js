@@ -3,7 +3,7 @@ const os = require('os')
 const storage = require('electron-json-storage')
 const dataPath = storage.getDataPath()
 const { app, BrowserWindow, ipcMain} = electron
-const SECS_IN_DAY = 1000
+const SECS_IN_DAY = 24 * 60 * 60
 storage.setDataPath(os.tmpdir())
 var eNotify
 let tasks = new Array()

@@ -9,6 +9,9 @@
     user-select: none; /* Standard */
     cursor: pointer;
 }
+body {
+    background: white;
+}
 .trash {
     display: inline-table;
 }
